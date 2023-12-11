@@ -1,20 +1,58 @@
 ﻿using DemoHttp.Models.ReqRes;
+using System.Net.Http.Json;
 
 namespace DemoHttp.Services.ReqRes;
 
-public class ReqResService
+public class ReqResDatabaseService : IReqResService
 {
-    private readonly HttpClient httpClient = new();
-    private string baseUrl = "https://reqres.in/api/users/";
+    public Task<ReqResResponse?> GetReqResData()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Person>?> GetReqResPeopleAsync()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+
+public class ReqResService : IReqResService
+{
+    private readonly IHttpClientFactory httpClientFactory;
+
+    public ReqResService(IHttpClientFactory httpClientFactory)
+    {
+        this.httpClientFactory = httpClientFactory;
+    }
+
     public async Task<ReqResResponse?> GetReqResData()
     {
-        var response = await httpClient.GetAsync(baseUrl);
-        if(response.IsSuccessStatusCode == true)
+        var httpClient = httpClientFactory.CreateClient("reqres");
+        var response = await httpClient.GetAsync("");
+        if (response.IsSuccessStatusCode == true)
         {
-            return null;
-        } else
+            return await response.Content.ReadFromJsonAsync<ReqResResponse>();
+        }
+        else
         {
             return null;
         }
     }
+
+    public async Task<List<Person>?> GetReqResPeopleAsync()
+    {
+        var httpClient = httpClientFactory.CreateClient("reqres");
+        var response = await httpClient.GetAsync("");
+        if (response.IsSuccessStatusCode == true)
+        {
+            var data = await response.Content.ReadFromJsonAsync<ReqResResponse>();
+            return data?.People?.ToList();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 }

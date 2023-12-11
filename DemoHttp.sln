@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoHttp.Services", "DemoHt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoHttp.Console", "DemoHttp.Console\DemoHttp.Console.csproj", "{DC317B3C-BBDE-4044-89F1-3A22851937FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoHttp.Web", "DemoHttp.Web\DemoHttp.Web.csproj", "{B2D6EEA6-F2EE-4039-BA16-955781E1F7B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DC317B3C-BBDE-4044-89F1-3A22851937FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC317B3C-BBDE-4044-89F1-3A22851937FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC317B3C-BBDE-4044-89F1-3A22851937FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2D6EEA6-F2EE-4039-BA16-955781E1F7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D6EEA6-F2EE-4039-BA16-955781E1F7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D6EEA6-F2EE-4039-BA16-955781E1F7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D6EEA6-F2EE-4039-BA16-955781E1F7B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
