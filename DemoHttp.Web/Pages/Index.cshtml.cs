@@ -1,18 +1,17 @@
-using DemoHttp.Models.ReqRes;
-using DemoHttp.Services.ReqRes;
-using Microsoft.AspNetCore.Mvc;
+using DemoHttp.Models.RandomUser;
+using DemoHttp.Services.RandomUserService;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DemoHttp.Web.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly IReqResService? _service; 
-
-        public List<Person>? People { get; set; } = new();
+        private readonly IRandomUserService? _service;
+        public List<Result>? People { get; set; } = new();
         public string? Message { get; set; }
+        public string? Gender { get; set; } = "female";
 
-        public IndexModel(IReqResService service)
+        public IndexModel(IRandomUserService service)
         {
             _service = service;
         }
@@ -20,21 +19,19 @@ namespace DemoHttp.Web.Pages
         public async Task OnGet()
         {
             Message = "";
-            if(_service is null)
+            if (_service is null)
             {
                 return;
             }
+
             try
             {
-                People = await _service.GetReqResPeopleAsync();
+                People = await _service.GetReqResPepoleByGenderAsync(Gender);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Message = ex.Message;
-                
+                Message = e.Message;
             }
-
-            
         }
     }
 }

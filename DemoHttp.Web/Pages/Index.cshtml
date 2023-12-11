@@ -9,18 +9,16 @@
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-@if(Model.People is not null)
+@if (Model.People is not null)
 {
     <div class="row">
-    @foreach (var person in Model.People)
-    {
-
+        @foreach (var person in Model.People)
+        {
             <div class="col-md-4">
-                <p>@person.FirstName @person.LastName</p>
-                <img src="@person.Avatar" />
+                <p>@person.Name?.First</p>
+                <img src="@person.Picture?.Large" alt=""/>
             </div>
-        
-    }
+        }
     </div>
 }
 

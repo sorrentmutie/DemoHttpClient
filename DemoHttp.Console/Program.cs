@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using DemoHttp.Services.ReqRes;
+﻿using DemoHttp.Services.ReqRes;
 
 Console.WriteLine("Hello, World!");
 

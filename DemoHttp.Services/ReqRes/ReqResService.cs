@@ -16,19 +16,18 @@ public class ReqResDatabaseService : IReqResService
     }
 }
 
-
 public class ReqResService : IReqResService
 {
-    private readonly IHttpClientFactory httpClientFactory;
+    private readonly IHttpClientFactory _httpClientFactory;
 
     public ReqResService(IHttpClientFactory httpClientFactory)
     {
-        this.httpClientFactory = httpClientFactory;
+        this._httpClientFactory = httpClientFactory;
     }
 
     public async Task<ReqResResponse?> GetReqResData()
     {
-        var httpClient = httpClientFactory.CreateClient("reqres");
+        var httpClient = _httpClientFactory.CreateClient("reqres");
         var response = await httpClient.GetAsync("");
         if (response.IsSuccessStatusCode == true)
         {
@@ -42,7 +41,7 @@ public class ReqResService : IReqResService
 
     public async Task<List<Person>?> GetReqResPeopleAsync()
     {
-        var httpClient = httpClientFactory.CreateClient("reqres");
+        var httpClient = _httpClientFactory.CreateClient("reqres");
         var response = await httpClient.GetAsync("");
         if (response.IsSuccessStatusCode == true)
         {
@@ -54,5 +53,4 @@ public class ReqResService : IReqResService
             return null;
         }
     }
-
 }
