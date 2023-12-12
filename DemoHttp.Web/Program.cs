@@ -5,14 +5,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-//builder.Services.AddScoped<HttpClient>();
+
+var JsonPlaceHolderUrl= builder.Configuration["JssonPlaceholder:BaseUrl"];
+
 builder.Services.AddHttpClient("json-placeholder",
-    client => { client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/"); });
+    client => { client.BaseAddress = new Uri(JsonPlaceHolderUrl ?? ""); });
 
 builder.Services.AddScoped<IPeopleTodosServices, PeopleTodosServices>();
-// builder.Services.AddScoped<IRandomUserService, RandomUserService>();
-// builder.Services.AddScoped<IReqResService, ReqResService>();
-// builder.Services.AddScoped<IReqResService, ReqResDatabaseService>();
 
 var app = builder.Build();
 
