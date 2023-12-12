@@ -60,4 +60,19 @@ public class RandomUserService : IRandomUserService
             return null;
         }
     }
+
+    public Task<RandomUserData?> GetReqResData()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Result>?> GetReqResPeopleAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Result>?> GetReqResPepoleByGenderAsync(string? gender)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -31,8 +31,9 @@ public class StaticConcerts : IConcert
             }
     };
 
-    public Task AddConcertAsync(Concert concert)
+    public async Task<int> AddConcertAsync(Concert concert)
     {
+        await Task.Delay(1000);
         if(concerts is  null || concerts.Count() == 0)
         {
             concerts = new List<Concert>();
@@ -43,7 +44,7 @@ public class StaticConcerts : IConcert
         }
 
         concerts.Add(concert);
-        return Task.CompletedTask;
+        return concert.Id;
     }
 
     public Task DeleteConcertAsync(int id)
