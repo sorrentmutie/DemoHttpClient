@@ -11,6 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IConcert, StaticConcerts>();
 
+var connectionString = builder.Configuration.GetConnectionString("Concerti");
+// builder.Services.AddDbContext<ConcertiContext>(options => options.UseSqlServer(connectionString));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
