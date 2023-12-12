@@ -13,7 +13,7 @@ public class RandomUserService : IRandomUserService
         this._httpClientFactory = httpClientFactory;
     }
 
-    public async Task<RandomUserData?> GetReqResData()
+    public async Task<RandomUserData?> GetData()
     {
         var httpClient = _httpClientFactory.CreateClient("randomUser");
         var response = await httpClient.GetAsync("");
@@ -27,7 +27,7 @@ public class RandomUserService : IRandomUserService
         }
     }
 
-    public async Task<List<Result>?> GetReqResPeopleAsync()
+    public async Task<List<Result>?> GetPeopleAsync()
     {
         var httpClient = _httpClientFactory.CreateClient("randomUser");
         var response = await httpClient.GetAsync("");
@@ -42,18 +42,18 @@ public class RandomUserService : IRandomUserService
         }
     }
 
-    public async Task<List<Result>?> GetReqResPepoleByGenderAsync(string? gender)
+    public async Task<List<Result>?> GetPeopleByGenderAsync(string? gender)
     {
         var httpClient = _httpClientFactory.CreateClient("randomUser");
         var response = await httpClient.GetAsync("");
         if (response.IsSuccessStatusCode == true)
         {
             var data = await response.Content.ReadFromJsonAsync<RandomUserData>();
-            var femalePepole = data?.Results?
+            var femalePeople = data?.Results?
                 .Where(person => person.Gender == gender)
                 .ToList();
 
-            return await Task.FromResult(femalePepole);
+            return femalePeople;
         }
         else
         {

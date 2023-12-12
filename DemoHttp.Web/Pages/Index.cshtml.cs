@@ -1,20 +1,15 @@
-using DemoHttp.Models.RandomUser;
-using DemoHttp.Services.RandomUserService;
+using DemoHttp.Models.PeopleTodos;
+using DemoHttp.Services.PeopleTodos;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DemoHttp.Web.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel(IPeopleTodosServices service) : PageModel
     {
-        private readonly IRandomUserService? _service;
-        public List<Result>? People { get; set; } = new();
+        private readonly IPeopleTodosServices? _service = service;
+        public List<Person>? People { get; set; } = [];
+        public List<Todos>? Todos { get; set; } = [];
         public string? Message { get; set; }
-        public string? Gender { get; set; } = "female";
-
-        public IndexModel(IRandomUserService service)
-        {
-            _service = service;
-        }
 
         public async Task OnGet()
         {
@@ -26,7 +21,8 @@ namespace DemoHttp.Web.Pages
 
             try
             {
-                People = await _service.GetReqResPepoleByGenderAsync(Gender);
+                People = await _service.GetPeopleAsync();
+                Todos = await _service.GetTodosAsync(2);
             }
             catch (Exception e)
             {

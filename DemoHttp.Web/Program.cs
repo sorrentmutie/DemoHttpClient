@@ -1,5 +1,4 @@
-using DemoHttp.Services.RandomUserService;
-using DemoHttp.Services.ReqRes;
+using DemoHttp.Services.PeopleTodos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 //builder.Services.AddScoped<HttpClient>();
-builder.Services.AddHttpClient("randomUser",
-    client => { client.BaseAddress = new Uri("https://randomuser.me/api?results=100"); });
-builder.Services.AddScoped<IRandomUserService, RandomUserService>();
+builder.Services.AddHttpClient("json-placeholder",
+    client => { client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/"); });
+
+builder.Services.AddScoped<IPeopleTodosServices, PeopleTodosServices>();
+// builder.Services.AddScoped<IRandomUserService, RandomUserService>();
 // builder.Services.AddScoped<IReqResService, ReqResService>();
 // builder.Services.AddScoped<IReqResService, ReqResDatabaseService>();
 

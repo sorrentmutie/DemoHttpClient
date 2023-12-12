@@ -15,9 +15,21 @@
         @foreach (var person in Model.People)
         {
             <div class="col-md-4">
-                <p>@person.Name?.First</p>
-                <img src="@person.Picture?.Large" alt=""/>
+                <p>@person.Name</p>
+                <p>@person.Company?.Name</p>
+                <p>@person.Id</p>
             </div>
+        }
+
+        @if (Model.Todos != null)
+        {
+            foreach (var todo in Model.Todos)
+            {
+                <div class="col-md-4">
+                    <p>@todo.Title</p>
+                    <p>@todo.Id</p>
+                </div>
+            }
         }
     </div>
 }

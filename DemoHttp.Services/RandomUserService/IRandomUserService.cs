@@ -5,9 +5,9 @@ namespace DemoHttp.Services.RandomUserService
 {
     public interface IRandomUserService
     {
-        Task<RandomUserData?> GetReqResData();
-        Task<List<Result>?> GetReqResPeopleAsync();
+        Task<RandomUserData?> GetData();
+        Task<List<Result>?> GetPeopleAsync();
 
-        Task<List<Result>?> GetReqResPepoleByGenderAsync(string? gender);
+        Task<List<Result>?> GetPeopleByGenderAsync(string? gender);
     }
 }
