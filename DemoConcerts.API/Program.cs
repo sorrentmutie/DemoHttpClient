@@ -1,7 +1,8 @@
+using DemoConcertsDB;
 using DemoHttp.Models.Music;
 using DemoHttp.Models.Music.Interfaces;
 using DemoHttp.Services.Concerts;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IConcert, StaticConcerts>();
+builder.Services.AddScoped<IConcert, DbConcerts>();
 
-var connectionString = builder.Configuration.GetConnectionString("Concerti");
-// builder.Services.AddDbContext<ConcertiContext>(options => options.UseSqlServer(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("MusicDB");
+builder.Services.AddDbContext<ConcertsDbContext>(options => options.UseSqlite(connectionString));
 
 var app = builder.Build();
 
@@ -28,13 +29,10 @@ app.UseHttpsRedirection();
 var mapGroup = app.MapGroup("/concerts");
 
 
-mapGroup.MapGet("/", async (IConcert concerts) =>
-{
-    return Results.Ok(await concerts.GetConcertsAsync());
-});
+mapGroup.MapGet("/", async (IConcert concerts) => Results.Ok((object?)await concerts.GetConcertsAsync()));
 
-mapGroup.MapGet("/{id}", async (IConcert concerts, int id) =>
-     await concerts.GetConcertAsync(id) is Concert c
+mapGroup.MapGet("/{id:int}", async (IConcert concerts, int id) =>
+     await concerts.GetConcertAsync(id) is { } c
         ? Results.Ok(c)
         : Results.NotFound());
 
@@ -51,17 +49,14 @@ mapGroup.MapPost("/", async (IConcert concerts, Concert newConcert) => {
     return Results.Created($"/concerts/{id}", newConcert);
 });
 
-mapGroup.MapDelete("/{id}", async (IConcert concerts, int id) =>
+mapGroup.MapDelete("/{id:int}", async (IConcert concerts, int id) =>
 {
-    if(await concerts.GetConcertAsync(id) is Concert c)
-    {
-        await concerts.DeleteConcertAsync(id);
-        return Results.Ok();
-    }
-    return Results.NotFound();
+    if (await concerts.GetConcertAsync(id) is not { } c) return Results.NotFound();
+    await concerts.DeleteConcertAsync(id);
+    return Results.Ok();
 });
 
-mapGroup.MapPut("/{id}", async (IConcert concerts, int id, Concert updatedConcert) => {
+mapGroup.MapPut("/{id:int}", async (IConcert concerts, int id, Concert updatedConcert) => {
 
     if (id != updatedConcert.Id) return Results.BadRequest();
 

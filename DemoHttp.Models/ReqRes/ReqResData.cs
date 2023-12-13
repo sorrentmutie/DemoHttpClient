@@ -14,8 +14,8 @@ public class ReqResResponse
 
 public class Support
 {
-    public string url { get; set; } = null!;
-    public string text { get; set; } = null!;
+    [JsonPropertyName("url")]public string Url { get; set; } = null!;
+    [JsonPropertyName("text")]public string Text { get; set; } = null!;
 }
 
 public class Person

@@ -6,10 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 
-var JsonPlaceHolderUrl= builder.Configuration["JssonPlaceholder:BaseUrl"];
+var jsonPlaceHolderUrl= builder.Configuration["JsonPlaceholder:BaseUrl"];
 
 builder.Services.AddHttpClient("json-placeholder",
-    client => { client.BaseAddress = new Uri(JsonPlaceHolderUrl ?? ""); });
+    client => { client.BaseAddress = new Uri(jsonPlaceHolderUrl ?? ""); });
 
 builder.Services.AddScoped<IPeopleTodosServices, PeopleTodosServices>();
 

@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Json;
 using DemoHttp.Models.RandomUser;
-using DemoHttp.Models.ReqRes;
 
 namespace DemoHttp.Services.RandomUserService;
 

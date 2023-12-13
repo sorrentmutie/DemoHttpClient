@@ -1,5 +1,4 @@
 ﻿using DemoHttp.Models.RandomUser;
-using DemoHttp.Models.ReqRes;
 
 namespace DemoHttp.Services.RandomUserService
 {

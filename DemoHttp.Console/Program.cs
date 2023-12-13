@@ -1,6 +1,4 @@
-﻿using DemoHttp.Services.ReqRes;
-
-Console.WriteLine("Hello, World!");
+﻿Console.WriteLine("Hello, World!");
 
 //var httpClient = new HttpClient();  
 //var service = new ReqResService(httpClient);
