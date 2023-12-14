@@ -1,10 +1,14 @@
-﻿namespace DemoHttp.Models.Music.Interfaces;
+﻿using DemoHttp.Models.DTO;
+
+namespace DemoHttp.Models.Music.Interfaces;
 
 public interface IConcert
 {
-    Task<List<Concert>?> GetConcertsAsync();
-    Task<Concert?> GetConcertAsync(int id);
-    Task<int> AddConcertAsync(Concert concert);
+    Task<List<ConcertDtoForVisualization>?> GetConcertsAsync();
+    Task<ConcertDto?> GetConcertDtoAsync(int id);
+    Task<ConcertDtoForVisualization?> GetConcertAsync(int id);
+    Task<int> AddConcertAsync(ConcertDtoBase concert);
     Task DeleteConcertAsync(int id);
-    Task UpdateConcertAsync(Concert concert);
+    Task UpdateConcertAsync(ConcertDto updatedConcert);
+    Task<List<ArtistDto>?> GetArtistsAsync();
 }

@@ -1,4 +1,5 @@
 using DemoConcertsDB;
+using DemoHttp.Models.DTO;
 using DemoHttp.Models.Music;
 using DemoHttp.Models.Music.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -7,27 +8,77 @@ namespace DemoHttp.Services.Concerts;
 
 public class DbConcerts(ConcertsDbContext context) : IConcert
 {
-    public async Task<List<Concert>?> GetConcertsAsync()
+    /*
+  
+    
+    public async Task UpdateConcertAsync(Concert newConcert)
     {
-         return await context.Concerts
-             .AsNoTracking()
-             .Include(concert => concert.Artist)
-             .ToListAsync();
+        var concert = await context.Concerts.FirstOrDefaultAsync(x => x.Id == newConcert.Id);
+
+        if (concert is not null)
+        {
+            concert.Date = newConcert.Date;
+            concert.Location = newConcert.Location;
+            concert.Artist = newConcert.Artist;
+        }
+
+        await context.SaveChangesAsync();
     }
 
-    public async Task<Concert?> GetConcertAsync(int id)
+    public async Task<List<Artist>?> GetArtistsAsync()
     {
-        return await context.Concerts
+        return await context.Artists
+            .AsNoTracking()
+            .Include(artist => artist.Concerts)
+            .ToListAsync();
+    }
+    */
+    public async Task<List<ConcertDtoForVisualization>?> GetConcertsAsync()
+    {
+        return (await context.Concerts
             .AsNoTracking()
             .Include(concert => concert.Artist)
-            .FirstOrDefaultAsync(c => c.Id == id);
+            .ToListAsync())
+            .ConvertConcertsToDto();
     }
 
-    public async Task<int> AddConcertAsync(Concert concert)
+    public async Task<ConcertDto?> GetConcertDtoAsync(int id)
     {
-        await context.Concerts.AddAsync(concert);
+        return (await context.Concerts
+                .AsNoTracking()
+                .Include(concert => concert.Artist)
+                .FirstOrDefaultAsync(c => c.Id == id))?
+            .ConvertConcertSpecialToDto();    }
+
+    public async Task<ConcertDtoForVisualization?> GetConcertAsync(int id)
+    {
+        return (await context.Concerts
+            .AsNoTracking()
+            .Include(concert => concert.Artist)
+            .FirstOrDefaultAsync(c => c.Id == id))?
+            .ConvertConcertToDto();
+    }
+
+    public async Task<int> AddConcertAsync(ConcertDtoBase concert)
+    {
+        
+        var concertDb = concert.ConvertDtoToConcert();
+        
+        if (concert.ArtistId == 0 && concert.Artist != null!)
+        {
+            var newArtist = new Artist
+            {
+                Name = concert.Artist.Name,
+                Surname = concert.Artist.Surname,
+                BirthYear = concert.Artist.BirthYear
+            };
+            await context.Artists.AddAsync(newArtist);
+            await context.SaveChangesAsync();
+            concertDb.ArtistId = newArtist.Id;
+        }
+        await context.Concerts.AddAsync(concertDb);
         await context.SaveChangesAsync();
-        return concert.Id;
+        return concertDb.Id;    
     }
 
     public async Task DeleteConcertAsync(int id)
@@ -42,20 +93,28 @@ public class DbConcerts(ConcertsDbContext context) : IConcert
             context.Concerts.Remove(concert);
         }
 
-        await context.SaveChangesAsync();
-    }
+        await context.SaveChangesAsync();    }
 
-    public async Task UpdateConcertAsync(Concert newConcert)
+    public async Task UpdateConcertAsync(ConcertDto updatedConcert)
     {
-        var concert = await context.Concerts.FirstOrDefaultAsync(x => x.Id == newConcert.Id);
+        var concertDb = await context.Concerts.FirstOrDefaultAsync(x => x.Id == updatedConcert.Id);
 
-        if (concert is not null)
+        if (concertDb is not null)
         {
-            concert.Date = newConcert.Date;
-            concert.Location = newConcert.Location;
-            concert.Artist = newConcert.Artist;
+            concertDb.Date = updatedConcert.Date;
+            concertDb.Location = updatedConcert.Location;
         }
 
         await context.SaveChangesAsync();
+    }
+
+    public async Task<List<ArtistDto>?> GetArtistsAsync()
+    {
+        return (await context.Artists
+            .AsNoTracking()
+            .Include(artist => artist.Concerts)
+            .ToListAsync())
+            .ConvertArtistsToDto();
+        
     }
 }

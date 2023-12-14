@@ -1,4 +1,3 @@
-
 namespace DemoConcertsDB;
 
 public static class Program
