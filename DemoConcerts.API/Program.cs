@@ -13,9 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IConcert, DbConcerts>();
 
-var connectionString = builder.Configuration.GetConnectionString("MusicDB");
-builder.Services.AddDbContext<ConcertsDbContext>(options => options.UseSqlite(connectionString,
-    b => b.MigrationsAssembly("DemoConcertsDB")));
+builder.Services.AddDbContext<ConcertsDbContext>(options => 
+    options.UseSqlite(builder.Configuration.GetConnectionString("MusicDB"),
+    optionsBuilder => optionsBuilder.MigrationsAssembly("DemoConcertsDB")));
 
 var app = builder.Build();
 
