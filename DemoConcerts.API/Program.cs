@@ -13,9 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IConcert, DbConcerts>();
 
-builder.Services.AddDbContext<ConcertsDbContext>(options => 
+builder.Services.AddDbContext<ConcertsDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MusicDB"),
-    optionsBuilder => optionsBuilder.MigrationsAssembly("DemoConcertsDB")));
+        optionsBuilder => optionsBuilder.MigrationsAssembly("DemoConcertsDB")));
 
 var app = builder.Build();
 
@@ -28,19 +28,19 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var mapGroup = app.MapGroup("/concerts");
+var mapConcert = app.MapGroup("/concerts");
 var mapArtist = app.MapGroup("/artists");
 
 
-mapGroup.MapGet("/", async (IConcert concerts) =>
+mapConcert.MapGet("/", async (IConcert concerts) =>
     Results.Ok(await concerts.GetConcertsAsync()));
 
-mapGroup.MapGet("/{id:int}", async (IConcert concerts, int id) =>
+mapConcert.MapGet("/{id:int}", async (IConcert concerts, int id) =>
     await concerts.GetConcertAsync(id) is { } c
         ? Results.Ok(c)
         : Results.NotFound());
 
-mapGroup.MapPost("/", async (IConcert concerts, ConcertDtoBase newConcert) =>
+mapConcert.MapPost("/", async (IConcert concerts, ConcertDtoBase newConcert) =>
 {
     /*if (newConcert.ArtistId == 0 || newConcert.Date.Year == 1)
     {
@@ -52,16 +52,15 @@ mapGroup.MapPost("/", async (IConcert concerts, ConcertDtoBase newConcert) =>
     return Results.Created($"/concerts/{id}", newConcert);
 });
 
-mapGroup.MapDelete("/{id:int}", async (IConcert concerts, int id) =>
+mapConcert.MapDelete("/{id:int}", async (IConcert concerts, int id) =>
 {
     if (await concerts.GetConcertAsync(id) is null) return Results.NotFound();
     await concerts.DeleteConcertAsync(id);
     return Results.Ok();
 });
 
-mapGroup.MapPut("/{id:int}", async (IConcert concerts, int id, ConcertDto updatedConcert) =>
+mapConcert.MapPut("/{id:int}", async (IConcert concerts, int id, ConcertDto updatedConcert) =>
 {
-    
     if (id != updatedConcert.Id) return Results.BadRequest();
 
     var c = await concerts.GetConcertDtoAsync(id);
@@ -70,11 +69,11 @@ mapGroup.MapPut("/{id:int}", async (IConcert concerts, int id, ConcertDto update
     if (updatedConcert.Date.Year != 1) c.Date = updatedConcert.Date;
     c.Location = updatedConcert.Location;
     await concerts.UpdateConcertAsync(c);
-    
+
     return Results.NoContent();
 });
 
-mapGroup.MapPatch("/{id}", async (IConcert concerts, int id, Concert updatedConcert) =>
+mapConcert.MapPatch("/{id}", async (IConcert concerts, int id, Concert updatedConcert) =>
 {
     if (id != updatedConcert.Id) return Results.BadRequest();
 
@@ -84,8 +83,8 @@ mapGroup.MapPatch("/{id}", async (IConcert concerts, int id, Concert updatedConc
     if (updatedConcert.Date.Year != 1) c.Date = updatedConcert.Date;
     c.Location = updatedConcert.Location;
     await concerts.UpdateConcertAsync(c);
-    
-    return Results.NoContent();   
+
+    return Results.NoContent();
 });
 
 mapArtist.MapGet("/", async (IConcert service) =>
