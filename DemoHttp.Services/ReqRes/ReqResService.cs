@@ -29,28 +29,20 @@ public class ReqResService : IReqResService
     {
         var httpClient = _httpClientFactory.CreateClient("reqres");
         var response = await httpClient.GetAsync("");
-        if (response.IsSuccessStatusCode == true)
+        if (response.IsSuccessStatusCode)
         {
             return await response.Content.ReadFromJsonAsync<ReqResResponse>();
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
     }
 
     public async Task<List<Person>?> GetReqResPeopleAsync()
     {
         var httpClient = _httpClientFactory.CreateClient("reqres");
         var response = await httpClient.GetAsync("");
-        if (response.IsSuccessStatusCode == true)
-        {
-            var data = await response.Content.ReadFromJsonAsync<ReqResResponse>();
-            return data?.People?.ToList();
-        }
-        else
-        {
-            return null;
-        }
+        if (!response.IsSuccessStatusCode) return null;
+        var data = await response.Content.ReadFromJsonAsync<ReqResResponse>();
+        return data?.People?.ToList();
     }
 }

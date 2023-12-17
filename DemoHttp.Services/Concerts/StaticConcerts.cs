@@ -1,12 +1,13 @@
-﻿using DemoHttp.Models.DTO;
+﻿/*
+using DemoHttp.Models.DTO;
 using DemoHttp.Models.Music;
 using DemoHttp.Models.Music.Interfaces;
 
 namespace DemoHttp.Services.Concerts;
-/*
+
 public class StaticConcerts : IConcert
 {
-    
+
     private static List<Concert> _concerts =
     [
         new Concert
@@ -107,7 +108,7 @@ public class StaticConcerts : IConcert
     {
         throw new NotImplementedException();
     }
-    
+
     public Task<List<ConcertDto>?> GetConcertsAsync()
     {
         throw new NotImplementedException();
@@ -137,5 +138,6 @@ public class StaticConcerts : IConcert
     {
         throw new NotImplementedException();
     }
-    
+
 }*/
+

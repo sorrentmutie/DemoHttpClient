@@ -8,31 +8,6 @@ namespace DemoHttp.Services.Concerts;
 
 public class DbConcerts(ConcertsDbContext context) : IConcert
 {
-    /*
-  
-    
-    public async Task UpdateConcertAsync(Concert newConcert)
-    {
-        var concert = await context.Concerts.FirstOrDefaultAsync(x => x.Id == newConcert.Id);
-
-        if (concert is not null)
-        {
-            concert.Date = newConcert.Date;
-            concert.Location = newConcert.Location;
-            concert.Artist = newConcert.Artist;
-        }
-
-        await context.SaveChangesAsync();
-    }
-
-    public async Task<List<Artist>?> GetArtistsAsync()
-    {
-        return await context.Artists
-            .AsNoTracking()
-            .Include(artist => artist.Concerts)
-            .ToListAsync();
-    }
-    */
     public async Task<List<ConcertDtoForVisualization>?> GetConcertsAsync()
     {
         return (await context.Concerts

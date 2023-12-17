@@ -54,7 +54,7 @@ mapGroup.MapPost("/", async (IConcert concerts, ConcertDtoBase newConcert) =>
 
 mapGroup.MapDelete("/{id:int}", async (IConcert concerts, int id) =>
 {
-    if (await concerts.GetConcertAsync(id) is not { } c) return Results.NotFound();
+    if (await concerts.GetConcertAsync(id) is null) return Results.NotFound();
     await concerts.DeleteConcertAsync(id);
     return Results.Ok();
 });

@@ -16,48 +16,35 @@ public class RandomUserService : IRandomUserService
     {
         var httpClient = _httpClientFactory.CreateClient("randomUser");
         var response = await httpClient.GetAsync("");
-        if (response.IsSuccessStatusCode == true)
+        if (response.IsSuccessStatusCode)
         {
             return await response.Content.ReadFromJsonAsync<RandomUserData>();
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
 
     public async Task<List<Result>?> GetPeopleAsync()
     {
         var httpClient = _httpClientFactory.CreateClient("randomUser");
         var response = await httpClient.GetAsync("");
-        if (response.IsSuccessStatusCode == true)
-        {
-            var data = await response.Content.ReadFromJsonAsync<RandomUserData>();
-            return data?.Results;
-        }
-        else
-        {
-            return null;
-        }
+        if (!response.IsSuccessStatusCode) return null;
+        var data = await response.Content.ReadFromJsonAsync<RandomUserData>();
+        return data?.Results;
+
     }
 
     public async Task<List<Result>?> GetPeopleByGenderAsync(string? gender)
     {
         var httpClient = _httpClientFactory.CreateClient("randomUser");
         var response = await httpClient.GetAsync("");
-        if (response.IsSuccessStatusCode == true)
-        {
-            var data = await response.Content.ReadFromJsonAsync<RandomUserData>();
-            var femalePeople = data?.Results?
-                .Where(person => person.Gender == gender)
-                .ToList();
+        if (!response.IsSuccessStatusCode) return null;
+        var data = await response.Content.ReadFromJsonAsync<RandomUserData>();
+        var femalePeople = data?.Results?
+            .Where(person => person.Gender == gender)
+            .ToList();
 
-            return femalePeople;
-        }
-        else
-        {
-            return null;
-        }
+        return femalePeople;
+
     }
 
     public Task<RandomUserData?> GetReqResData()
