@@ -44,7 +44,7 @@ public static class ConcertExtensionMethods
             ArtistId = concert.ArtistId
         };
     }
-    
+
     public static ConcertDto ConvertConcertSpecialToDto(this Concert concert)
     {
         return new ConcertDto()

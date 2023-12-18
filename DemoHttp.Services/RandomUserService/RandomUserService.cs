@@ -20,6 +20,7 @@ public class RandomUserService : IRandomUserService
         {
             return await response.Content.ReadFromJsonAsync<RandomUserData>();
         }
+
         return null;
     }
 
@@ -30,7 +31,6 @@ public class RandomUserService : IRandomUserService
         if (!response.IsSuccessStatusCode) return null;
         var data = await response.Content.ReadFromJsonAsync<RandomUserData>();
         return data?.Results;
-
     }
 
     public async Task<List<Result>?> GetPeopleByGenderAsync(string? gender)
@@ -44,7 +44,6 @@ public class RandomUserService : IRandomUserService
             .ToList();
 
         return femalePeople;
-
     }
 
     public Task<RandomUserData?> GetReqResData()

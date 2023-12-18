@@ -2,7 +2,7 @@
 
 namespace DemoHttp.Models.Music;
 
-public class Concert: BaseEntity
+public class Concert : BaseEntity
 {
     public DateTime Date { get; set; }
     public string Location { get; set; } = null!;
@@ -11,7 +11,7 @@ public class Concert: BaseEntity
     public int ArtistId { get; set; }
 }
 
-public class Artist: BaseEntity
+public class Artist : BaseEntity
 {
     public required string Name { get; set; }
     public required string Surname { get; set; }

@@ -11,9 +11,9 @@ public class DbConcerts(ConcertsDbContext context) : IConcert
     public async Task<List<ConcertDtoForVisualization>?> GetConcertsAsync()
     {
         return (await context.Concerts
-            .AsNoTracking()
-            .Include(concert => concert.Artist)
-            .ToListAsync())
+                .AsNoTracking()
+                .Include(concert => concert.Artist)
+                .ToListAsync())
             .ConvertConcertsToDto();
     }
 
@@ -23,22 +23,22 @@ public class DbConcerts(ConcertsDbContext context) : IConcert
                 .AsNoTracking()
                 .Include(concert => concert.Artist)
                 .FirstOrDefaultAsync(c => c.Id == id))?
-            .ConvertConcertSpecialToDto();    }
+            .ConvertConcertSpecialToDto();
+    }
 
     public async Task<ConcertDtoForVisualization?> GetConcertAsync(int id)
     {
         return (await context.Concerts
-            .AsNoTracking()
-            .Include(concert => concert.Artist)
-            .FirstOrDefaultAsync(c => c.Id == id))?
+                .AsNoTracking()
+                .Include(concert => concert.Artist)
+                .FirstOrDefaultAsync(c => c.Id == id))?
             .ConvertConcertToDto();
     }
 
     public async Task<int> AddConcertAsync(ConcertDtoBase concert)
     {
-        
         var concertDb = concert.ConvertDtoToConcert();
-        
+
         if (concert.ArtistId == 0 && concert.Artist != null!)
         {
             var newArtist = new Artist
@@ -51,9 +51,10 @@ public class DbConcerts(ConcertsDbContext context) : IConcert
             await context.SaveChangesAsync();
             concertDb.ArtistId = newArtist.Id;
         }
+
         await context.Concerts.AddAsync(concertDb);
         await context.SaveChangesAsync();
-        return concertDb.Id;    
+        return concertDb.Id;
     }
 
     public async Task DeleteConcertAsync(int id)
@@ -68,7 +69,8 @@ public class DbConcerts(ConcertsDbContext context) : IConcert
             context.Concerts.Remove(concert);
         }
 
-        await context.SaveChangesAsync();    }
+        await context.SaveChangesAsync();
+    }
 
     public async Task UpdateConcertAsync(ConcertDto updatedConcert)
     {
@@ -86,10 +88,9 @@ public class DbConcerts(ConcertsDbContext context) : IConcert
     public async Task<List<ArtistDto>?> GetArtistsAsync()
     {
         return (await context.Artists
-            .AsNoTracking()
-            .Include(artist => artist.Concerts)
-            .ToListAsync())
+                .AsNoTracking()
+                .Include(artist => artist.Concerts)
+                .ToListAsync())
             .ConvertArtistsToDto();
-        
     }
 }
