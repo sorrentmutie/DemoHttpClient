@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoHttp.Web", "DemoHttp.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMusic.API", "DemoMusic.API\DemoMusic.API.csproj", "{D5B17672-8A56-4131-BD8D-EF97DD9F9C0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMusicDB", "DemoMusicDB\DemoMusicDB.csproj", "{3C532D33-0DD1-415A-A31E-D9A9A1A8308B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMusic.DB", "DemoMusic.DB\DemoMusic.DB.csproj", "{3C532D33-0DD1-415A-A31E-D9A9A1A8308B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

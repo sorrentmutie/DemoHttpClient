@@ -1,4 +1,4 @@
-using DemoMusicDB;
+using DemoMusic.DB;
 using DemoHttp.Models.DTO;
 using DemoHttp.Models.Music;
 using DemoHttp.Models.Music.Interfaces;
@@ -16,7 +16,7 @@ builder.Services.AddScoped<IArtist, DbArtistsImpl>();
 
 builder.Services.AddDbContext<MusicDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MusicDB"),
-        optionsBuilder => optionsBuilder.MigrationsAssembly("DemoMusicDB")));
+        optionsBuilder => optionsBuilder.MigrationsAssembly("DemoMusic.DB")));
 
 var app = builder.Build();
 

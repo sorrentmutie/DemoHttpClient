@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DemoMusicDB.Migrations
+namespace DemoMusic.DB.Migrations
 {
     /// <inheritdoc />
     public partial class InitialDatabase : Migration

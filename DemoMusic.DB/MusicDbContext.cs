@@ -1,8 +1,8 @@
 ﻿using DemoHttp.Models.Music;
-using DemoMusicDB.Configuration;
+using DemoMusic.DB.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace DemoMusicDB;
+namespace DemoMusic.DB;
 
 public class MusicDbContext : DbContext
 {
@@ -20,7 +20,7 @@ public class MusicDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder
-            .UseSqlite("Data Source = /Users/Francesco/Documents/Ellycode/DemoHttpClient/DemoMusicDB/MusicDB");
+            .UseSqlite("Data Source = /Users/Francesco/Documents/Ellycode/DemoHttpClient/DemoMusic.DB/MusicDB");
     }
     
 

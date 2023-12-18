@@ -1,7 +1,7 @@
 using DemoHttp.Models.DTO;
 using DemoHttp.Models.Music.Interfaces;
 using DemoHttp.Services.Music.ServicesDTO;
-using DemoMusicDB;
+using DemoMusic.DB;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoHttp.Services.Music;

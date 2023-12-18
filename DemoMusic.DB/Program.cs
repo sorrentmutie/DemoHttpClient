@@ -1,5 +1,5 @@
 
-namespace DemoMusicDB;
+namespace DemoMusic.DB;
 
 public static class Program
 {
