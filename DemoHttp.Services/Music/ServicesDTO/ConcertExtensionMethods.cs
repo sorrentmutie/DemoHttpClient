@@ -12,7 +12,7 @@ public static class ConcertExtensionMethods
             Id = concert.Id,
             Date = concert.Date,
             Location = concert.Location,
-            Artist =new ArtistDtoEssential()
+            Artist = new ArtistDtoEssential()
             {
                 Name = concert.Artist.Name,
                 Surname = concert.Artist.Surname,
@@ -45,7 +45,7 @@ public static class ConcertExtensionMethods
             Date = concert.Date,
             Location = concert.Location,
             ArtistId = concert.ArtistId,
-            Artist = new ArtistDto
+            Artist = new ArtistDtoWithId
             {
                 BirthYear = concert.Artist.BirthYear,
                 Id = concert.Artist.Id,

@@ -8,7 +8,7 @@ namespace DemoHttp.Services.Music;
 
 public class DbArtistsImpl(MusicDbContext context): IArtist
 {
-    public async Task<List<ArtistDto>?> GetArtistsAsync()
+    public async Task<List<ArtistConcertsDetailDto>?> GetArtistsAsync()
     {
         return (await context.Artists
                 .AsNoTracking()

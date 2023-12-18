@@ -4,5 +4,5 @@ namespace DemoHttp.Models.Music.Interfaces;
 
 public interface IArtist
 {
-    Task<List<ArtistDto>?> GetArtistsAsync();
+    Task<List<ArtistConcertsDetailDto>?> GetArtistsAsync();
 }
