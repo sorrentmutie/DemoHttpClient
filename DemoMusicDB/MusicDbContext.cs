@@ -1,18 +1,18 @@
-﻿using DemoConcertsDB.Configuration;
-using DemoHttp.Models.Music;
+﻿using DemoHttp.Models.Music;
+using DemoMusicDB.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace DemoConcertsDB;
+namespace DemoMusicDB;
 
-public class ConcertsDbContext : DbContext
+public class MusicDbContext : DbContext
 {
     public DbSet<Concert> Concerts { get; init; } = null!;
     public DbSet<Artist> Artists { get; init; } = null!;
 
-    public ConcertsDbContext(DbContextOptions<ConcertsDbContext> dbContextOptions) : base(dbContextOptions) { }
+    public MusicDbContext(DbContextOptions<MusicDbContext> dbContextOptions) : base(dbContextOptions) { }
 
-    /*
-    public ConcertsDbContext()
+    
+    public MusicDbContext()
     {
 
     }
@@ -20,9 +20,9 @@ public class ConcertsDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder
-            .UseSqlite("Data Source = /Users/Francesco/Documents/Ellycode/DemoHttpClient/DemoConcertsDB/MusicDB");
+            .UseSqlite("Data Source = /Users/Francesco/Documents/Ellycode/DemoHttpClient/DemoMusicDB/MusicDB");
     }
-    */
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

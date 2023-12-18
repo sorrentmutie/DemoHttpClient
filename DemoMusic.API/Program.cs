@@ -1,8 +1,8 @@
-using DemoConcertsDB;
+using DemoMusicDB;
 using DemoHttp.Models.DTO;
 using DemoHttp.Models.Music;
 using DemoHttp.Models.Music.Interfaces;
-using DemoHttp.Services.Concerts;
+using DemoHttp.Services.Music;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,11 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IConcert, DbConcerts>();
+builder.Services.AddScoped<IConcert, DbConcertsImpl>();
+builder.Services.AddScoped<IArtist, DbArtistsImpl>();
 
-builder.Services.AddDbContext<ConcertsDbContext>(options =>
+builder.Services.AddDbContext<MusicDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MusicDB"),
-        optionsBuilder => optionsBuilder.MigrationsAssembly("DemoConcertsDB")));
+        optionsBuilder => optionsBuilder.MigrationsAssembly("DemoMusicDB")));
 
 var app = builder.Build();
 
@@ -87,7 +88,7 @@ mapConcert.MapPatch("/{id}", async (IConcert concerts, int id, Concert updatedCo
     return Results.NoContent();
 });
 
-mapArtist.MapGet("/", async (IConcert service) =>
+mapArtist.MapGet("/", async (IArtist service) =>
     Results.Ok(await service.GetArtistsAsync()));
 
 app.Run();

@@ -10,5 +10,4 @@ public interface IConcert
     Task<int> AddConcertAsync(ConcertDtoBase concert);
     Task DeleteConcertAsync(int id);
     Task UpdateConcertAsync(ConcertDto updatedConcert);
-    Task<List<ArtistDto>?> GetArtistsAsync();
 }

@@ -1,12 +1,13 @@
-using DemoConcertsDB;
 using DemoHttp.Models.DTO;
 using DemoHttp.Models.Music;
 using DemoHttp.Models.Music.Interfaces;
+using DemoHttp.Services.Music.ServicesDTO;
+using DemoMusicDB;
 using Microsoft.EntityFrameworkCore;
 
-namespace DemoHttp.Services.Concerts;
+namespace DemoHttp.Services.Music;
 
-public class DbConcerts(ConcertsDbContext context) : IConcert
+public class DbConcertsImpl(MusicDbContext context) : IConcert
 {
     public async Task<List<ConcertDtoForVisualization>?> GetConcertsAsync()
     {
@@ -83,14 +84,5 @@ public class DbConcerts(ConcertsDbContext context) : IConcert
         }
 
         await context.SaveChangesAsync();
-    }
-
-    public async Task<List<ArtistDto>?> GetArtistsAsync()
-    {
-        return (await context.Artists
-                .AsNoTracking()
-                .Include(artist => artist.Concerts)
-                .ToListAsync())
-            .ConvertArtistsToDto();
     }
 }

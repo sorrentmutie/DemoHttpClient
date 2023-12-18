@@ -2,7 +2,7 @@ using DemoHttp.Models.Music;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DemoConcertsDB.Configuration;
+namespace DemoMusicDB.Configuration;
 
 public class ConcertConfiguration : IEntityTypeConfiguration<Concert>
 {

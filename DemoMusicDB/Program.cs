@@ -1,11 +1,12 @@
-namespace DemoConcertsDB;
+
+namespace DemoMusicDB;
 
 public static class Program
 {
     public static void Main()
     {
         /*
-        await using var context = new ConcertsDbContext();
+        await using var context = new MusicDbContext();
 
         var concerts = new List<Concert>()
         {
