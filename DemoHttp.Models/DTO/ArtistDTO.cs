@@ -8,3 +8,10 @@ public class ArtistDto
     public int BirthYear { get; set; }
     public List<ConcertDto> Concerts { get; set; } = new();
 }
+
+public class ArtistDtoEssential
+{
+    public string Name { get; set; } = null!;
+    public string Surname { get; set; } = null!;
+    public int BirthYear { get; set; }
+}

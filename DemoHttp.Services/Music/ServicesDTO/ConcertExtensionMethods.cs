@@ -5,25 +5,35 @@ namespace DemoHttp.Services.Music.ServicesDTO;
 
 public static class ConcertExtensionMethods
 {
-    public static List<ConcertDtoForVisualization> ConvertConcertsToDto(this List<Concert> concerts)
+    public static List<ConcertArtistDetailDto> ConvertConcertsToDto(this List<Concert> concerts)
     {
-        return concerts.Select(concert => new ConcertDtoForVisualization()
+        return concerts.Select(concert => new ConcertArtistDetailDto()
         {
             Id = concert.Id,
             Date = concert.Date,
             Location = concert.Location,
-            ArtistId = concert.ArtistId
+            Artist =new ArtistDtoEssential()
+            {
+                Name = concert.Artist.Name,
+                Surname = concert.Artist.Surname,
+                BirthYear = concert.Artist.BirthYear
+            }
         }).ToList();
     }
 
-    public static ConcertDtoForVisualization ConvertConcertToDto(this Concert concert)
+    public static ConcertArtistDetailDto ConvertConcertToDto(this Concert concert)
     {
-        return new ConcertDtoForVisualization()
+        return new ConcertArtistDetailDto()
         {
             Id = concert.Id,
             Date = concert.Date,
             Location = concert.Location,
-            ArtistId = concert.ArtistId
+            Artist = new ArtistDtoEssential()
+            {
+                Name = concert.Artist.Name,
+                Surname = concert.Artist.Surname,
+                BirthYear = concert.Artist.BirthYear
+            }
         };
     }
 

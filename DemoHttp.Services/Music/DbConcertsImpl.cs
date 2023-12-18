@@ -9,7 +9,7 @@ namespace DemoHttp.Services.Music;
 
 public class DbConcertsImpl(MusicDbContext context) : IConcert
 {
-    public async Task<List<ConcertDtoForVisualization>?> GetConcertsAsync()
+    public async Task<List<ConcertArtistDetailDto>?> GetConcertsAsync()
     {
         return (await context.Concerts
                 .AsNoTracking()
@@ -27,7 +27,7 @@ public class DbConcertsImpl(MusicDbContext context) : IConcert
             .ConvertConcertSpecialToDto();
     }
 
-    public async Task<ConcertDtoForVisualization?> GetConcertAsync(int id)
+    public async Task<ConcertArtistDetailDto?> GetConcertAsync(int id)
     {
         return (await context.Concerts
                 .AsNoTracking()

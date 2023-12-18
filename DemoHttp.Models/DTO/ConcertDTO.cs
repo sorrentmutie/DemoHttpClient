@@ -13,10 +13,10 @@ public class ConcertDtoBase
     public ArtistDto Artist { get; set; } = null!;
 }
 
-public class ConcertDtoForVisualization
+public class ConcertArtistDetailDto
 {
     public int Id { get; set; }
     public DateTime Date { get; set; }
     public string Location { get; set; } = null!;
-    public int ArtistId { get; set; }
+    public ArtistDtoEssential Artist { get; set; } = null!;
 }
