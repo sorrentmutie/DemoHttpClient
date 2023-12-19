@@ -15,7 +15,7 @@ public class ArtistDtoWithId
     public int BirthYear { get; set; }
 }
 
-public class ArtistConcertsDetailDto
+public class ArtistConcertsDetailWithIdDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;
@@ -24,11 +24,10 @@ public class ArtistConcertsDetailDto
     public List<ConcertDtoEssential> Concerts { get; set; } = new();
 }
 
-public class ArtistDto
+public class ArtistConcertsDetailDto
 {
-    public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string Surname { get; set; } = null!;
     public int BirthYear { get; set; }
-    public List<ConcertDto> Concerts { get; set; } = new();
+    public List<ConcertDtoEssential> Concerts { get; set; } = new();
 }

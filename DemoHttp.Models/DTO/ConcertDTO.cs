@@ -15,8 +15,8 @@ public class ConcertDtoBase
 
 public class ConcertDtoEssential
 {
-    public DateTime Date { get; set; }
-    public string Location { get; set; } = null!;
+    public required DateTime Date { get; init; }
+    public required string Location { get; init; } = null!;
 }
 
 public class ConcertDtoEssentialWithArtist
