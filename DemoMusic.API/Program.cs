@@ -18,6 +18,9 @@ builder.Services.AddDbContext<MusicDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MusicDB"),
         optionsBuilder => optionsBuilder.MigrationsAssembly("DemoMusic.DB")));
 
+var numberElementsPerPage = builder.Configuration["NumberElementsPerPage"] != null ?
+    Convert.ToInt32(builder.Configuration["NumberElementsPerPage"]) : 10;
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,7 +39,19 @@ var mapArtist = app.MapGroup("/artists");
 mapConcert.MapGet("/", async (IConcert concerts) =>
     Results.Ok(await concerts.GetConcertsAsync()));
 
-mapConcert.MapGet("/{id:int}", async (IConcert concerts, int id) =>
+mapConcert.MapGet("/pages/{page:min(1)}/direction/{direction:int}/order/{orderBy?}", 
+    async (IConcert concerts, int page, string? orderBy, int direction = 0) =>
+{
+    var orderingDirection = direction switch
+    {
+        0 => OrderingDirection.Ascending,
+        _ => OrderingDirection.Descending
+    };
+    return Results.Ok(await concerts.GetConcertsAsync(page, numberElementsPerPage, orderingDirection, orderBy));
+});
+    
+
+mapConcert.MapGet("/{id:int}/", async (IConcert concerts, int id) =>
     await concerts.GetConcertAsync(id) is { } c
         ? Results.Ok(c)
         : Results.NotFound());

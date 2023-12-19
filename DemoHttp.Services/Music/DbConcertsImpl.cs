@@ -18,6 +18,38 @@ public class DbConcertsImpl(MusicDbContext context) : IConcert
             .ConvertConcertsToDto();
     }
 
+    public async Task<ConcertsGetResponse> GetConcertsAsync(int page, int elements, OrderingDirection direction, string? orderBy)
+    {
+        var response = new ConcertsGetResponse
+        {
+            Total = await context.Concerts
+                .AsNoTracking()
+                .CountAsync(),
+            Page = page
+        };
+        
+        var selectedConcerts = context.Concerts
+                .AsNoTracking()
+                .Include(concert => concert.Artist);
+        var orderedConcerts = orderBy?.ToLower() switch
+        {
+            "location" => direction == OrderingDirection.Ascending
+                ? selectedConcerts.OrderBy(concert => concert.Location)
+                : selectedConcerts.OrderByDescending(concert => concert.Location),
+            _ => direction == OrderingDirection.Ascending
+                ? selectedConcerts.OrderBy(concert => concert.Date)
+                : selectedConcerts.OrderByDescending(concert => concert.Date)
+        };
+
+        var concertsList = (await orderedConcerts
+            .Skip(elements * (page - 1))
+            .Take(elements)
+            .ToListAsync()).ConvertConcertsToDto();
+        response.Concerts = concertsList;
+
+        return response;
+    }
+
     public async Task<ConcertDto?> GetConcertDtoAsync(int id)
     {
         return (await context.Concerts
