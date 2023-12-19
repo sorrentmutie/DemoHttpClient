@@ -3,6 +3,7 @@ using System;
 using DemoMusic.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoMusic.DB.Migrations
 {
     [DbContext(typeof(MusicDbContext))]
-    partial class MusicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231219151525_AddReviewMovie")]
+    partial class AddReviewMovie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -181,7 +184,7 @@ namespace DemoMusic.DB.Migrations
             modelBuilder.Entity("DemoHttp.Models.Cinema.ReviewMovie", b =>
                 {
                     b.HasOne("DemoHttp.Models.Cinema.Movie", "Movie")
-                        .WithMany("ReviewMovies")
+                        .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -206,11 +209,6 @@ namespace DemoMusic.DB.Migrations
                         .IsRequired();
 
                     b.Navigation("Artist");
-                });
-
-            modelBuilder.Entity("DemoHttp.Models.Cinema.Movie", b =>
-                {
-                    b.Navigation("ReviewMovies");
                 });
 
             modelBuilder.Entity("DemoHttp.Models.Music.Artist", b =>

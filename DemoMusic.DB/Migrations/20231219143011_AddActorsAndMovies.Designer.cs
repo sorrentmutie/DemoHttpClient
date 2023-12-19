@@ -3,6 +3,7 @@ using System;
 using DemoMusic.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoMusic.DB.Migrations
 {
     [DbContext(typeof(MusicDbContext))]
-    partial class MusicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231219143011_AddActorsAndMovies")]
+    partial class AddActorsAndMovies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -70,49 +73,6 @@ namespace DemoMusic.DB.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Movies");
-                });
-
-            modelBuilder.Entity("DemoHttp.Models.Cinema.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Mark")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("DemoHttp.Models.Cinema.ReviewMovie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ReviewId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ReviewerName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.HasIndex("ReviewId");
-
-                    b.ToTable("ReviewsMovies");
                 });
 
             modelBuilder.Entity("DemoHttp.Models.Music.Artist", b =>
@@ -178,25 +138,6 @@ namespace DemoMusic.DB.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DemoHttp.Models.Cinema.ReviewMovie", b =>
-                {
-                    b.HasOne("DemoHttp.Models.Cinema.Movie", "Movie")
-                        .WithMany("ReviewMovies")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DemoHttp.Models.Cinema.Review", "Review")
-                        .WithMany()
-                        .HasForeignKey("ReviewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-
-                    b.Navigation("Review");
-                });
-
             modelBuilder.Entity("DemoHttp.Models.Music.Concert", b =>
                 {
                     b.HasOne("DemoHttp.Models.Music.Artist", "Artist")
@@ -206,11 +147,6 @@ namespace DemoMusic.DB.Migrations
                         .IsRequired();
 
                     b.Navigation("Artist");
-                });
-
-            modelBuilder.Entity("DemoHttp.Models.Cinema.Movie", b =>
-                {
-                    b.Navigation("ReviewMovies");
                 });
 
             modelBuilder.Entity("DemoHttp.Models.Music.Artist", b =>
