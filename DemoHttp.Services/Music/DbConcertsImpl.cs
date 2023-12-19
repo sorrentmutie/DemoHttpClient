@@ -84,15 +84,7 @@ public class DbConcertsImpl(MusicDbContext context) : IConcert
             await context.SaveChangesAsync();
             concertDb.ArtistId = newArtist.Id;
         }
-        else
-        {
-            /* TODO:
-             * aggiornare i dati dell'artista
-             * 
-             */
-            
-        }
-
+        
         await context.Concerts.AddAsync(concertDb);
         await context.SaveChangesAsync();
         return concertDb.Id;
