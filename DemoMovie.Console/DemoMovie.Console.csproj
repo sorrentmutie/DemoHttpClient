@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DemoMovie.DB\DemoMovie.DB.csproj" />
       <ProjectReference Include="..\DemoMusic.DB\DemoMusic.DB.csproj" />
     </ItemGroup>
 

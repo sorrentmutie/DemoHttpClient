@@ -1,10 +1,9 @@
 ﻿using DemoHttp.Models.Cinema;
-using DemoMusic.DB;
-using Microsoft.EntityFrameworkCore;
+using DemoMovie.DB;
 
 Console.WriteLine("Hello, World!");
 
-var context = new MusicDbContext();
+var context = new MovieDbContext();
 
 /*await context.Actors.AddAsync(new Actor
 {
@@ -27,9 +26,9 @@ var context = new MusicDbContext();
             Title = "Lo chiamavano trinità"
         }
     }
-});*/
+});
 
-/*await context.Movies.AddAsync(new Movie
+await context.Movies.AddAsync(new Movie
 {
     Title = "Per un pugno di dollari",
     Actors = new List<Actor>
@@ -49,11 +48,12 @@ var context = new MusicDbContext();
             Salary = 176.23m
         }
     }
-});*/
+});
 
-// await context.SaveChangesAsync();
-
-/*var moviesWithActors = await context.Movies
+await context.SaveChangesAsync();
+*/
+/*
+var moviesWithActors = await context.Movies
     .AsNoTracking()
     .Include(movie => movie.Actors)
     .ToListAsync();
@@ -66,8 +66,8 @@ foreach (var movie in moviesWithActors)
         Console.WriteLine($"{actor.Name}, {actor.Surname}, {actor.BirthDate}, {actor.Salary}");
     }
 }*/
-
-/*var viaColVentoBis = await context.Movies.FirstOrDefaultAsync(movie => movie.Id == 1);
+/*
+var viaColVentoBis = await context.Movies.FirstOrDefaultAsync(movie => movie.Id == 1);
 if (viaColVentoBis is not null)
 {
     viaColVentoBis.Title = "Via Col Vento Bis";
@@ -99,7 +99,7 @@ await context.SaveChangesAsync();
 
 var newMovie = new Movie
 {
-    Title = "Karate Kid VIII",
+    Title = "Karate Kid",
 };
 
 await context.AddAsync(newMovie);

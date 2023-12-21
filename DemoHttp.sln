@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMusic.DB", "DemoMusic.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMovie.Console", "DemoMovie.Console\DemoMovie.Console.csproj", "{6C491795-D0A4-459F-9E16-A8A6D163B490}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMovie.DB", "DemoMovie.DB\DemoMovie.DB.csproj", "{E4C1281B-5901-4760-B02D-5550124F6FD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{6C491795-D0A4-459F-9E16-A8A6D163B490}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C491795-D0A4-459F-9E16-A8A6D163B490}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C491795-D0A4-459F-9E16-A8A6D163B490}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4C1281B-5901-4760-B02D-5550124F6FD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4C1281B-5901-4760-B02D-5550124F6FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4C1281B-5901-4760-B02D-5550124F6FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4C1281B-5901-4760-B02D-5550124F6FD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
