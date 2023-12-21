@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMovie.Console", "DemoMo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMovie.DB", "DemoMovie.DB\DemoMovie.DB.csproj", "{E4C1281B-5901-4760-B02D-5550124F6FD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMusic.Client", "DemoMusic.Client\DemoMusic.Client.csproj", "{6F5F3286-C9B9-4BAE-AF94-56B40AB7BF0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMusic.Console", "DemoMusic.Console\DemoMusic.Console.csproj", "{55360430-F0DE-4AF3-8328-34AAD45FAF36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,14 @@ Global
 		{E4C1281B-5901-4760-B02D-5550124F6FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4C1281B-5901-4760-B02D-5550124F6FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4C1281B-5901-4760-B02D-5550124F6FD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F5F3286-C9B9-4BAE-AF94-56B40AB7BF0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F5F3286-C9B9-4BAE-AF94-56B40AB7BF0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F5F3286-C9B9-4BAE-AF94-56B40AB7BF0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F5F3286-C9B9-4BAE-AF94-56B40AB7BF0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55360430-F0DE-4AF3-8328-34AAD45FAF36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55360430-F0DE-4AF3-8328-34AAD45FAF36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55360430-F0DE-4AF3-8328-34AAD45FAF36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55360430-F0DE-4AF3-8328-34AAD45FAF36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
