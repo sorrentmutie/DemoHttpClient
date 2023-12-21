@@ -20,7 +20,7 @@ builder.Services.AddDbContext<MusicDbContext>(options =>
 
 var numberElementsPerPage = builder.Configuration["NumberElementsPerPage"] != null
     ? Convert.ToInt32(builder.Configuration["NumberElementsPerPage"])
-    : 10;
+    : 2;
 
 var app = builder.Build();
 app.UseExceptionHandler(exceptionHandlerApp
@@ -47,10 +47,8 @@ mapConcert.MapGet("/page",
     async (IConcert concerts, 
         int page = 1, 
         string? orderBy = "Date", 
-        OrderingDirection orderingDirection = OrderingDirection.Ascending) =>
-    {
-        return Results.Ok(await concerts.GetConcertsAsync(page, numberElementsPerPage, orderingDirection, orderBy));
-    });
+        OrderingDirection orderingDirection = OrderingDirection.Ascending) 
+        => Results.Ok(await concerts.GetConcertsAsync(page, numberElementsPerPage, orderingDirection, orderBy)));
 
 
 mapConcert.MapGet("/{id:int}/", async (IConcert concerts, int id) =>

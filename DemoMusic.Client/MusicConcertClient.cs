@@ -30,4 +30,15 @@ public class MusicConcertClient : IMusicConcertClient
 
         return await response.Content.ReadFromJsonAsync<Concert?>();
     }
+
+    public async Task<ConcertsListResult?> GetConcertsWithPaginationAsync(int? page, string orderBy,
+        OrderingDirection direction)
+    {
+        var response =
+            await _httpClient.GetAsync($"concerts/page?page={page}&orderBy={orderBy}&orderingDirection={direction}");
+        if (!response.IsSuccessStatusCode) return null;
+
+        return await response.Content.ReadFromJsonAsync<ConcertsListResult?>();
+    }
+    
 }

@@ -7,10 +7,3 @@ public class Concert
     public string Location { get; set; } = null!;
     public Artist Artist { get; set; } = null!;
 }
-
-public class Artist
-{
-    public string Name { get; set; } = null!;
-    public string Surname { get; set; } = null!;
-    public int BirthYear { get; set; }
-}
