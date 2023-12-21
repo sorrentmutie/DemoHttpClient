@@ -1,4 +1,3 @@
-using System.Text.Json;
 using DemoMusic.DB;
 using DemoHttp.Models.DTO;
 using DemoHttp.Models.Music;
@@ -41,18 +40,15 @@ app.UseHttpsRedirection();
 var mapConcert = app.MapGroup("/concerts");
 var mapArtist = app.MapGroup("/artists");
 
-
 mapConcert.MapGet("/", async (IConcert concerts) =>
     Results.Ok(await concerts.GetConcertsAsync()));
 
-mapConcert.MapGet("/pages/{page:min(1)}/direction/{direction:int}/order/{orderBy?}",
-    async (IConcert concerts, int page, string? orderBy, int direction = 0) =>
+mapConcert.MapGet("/page",
+    async (IConcert concerts, 
+        int page = 1, 
+        string? orderBy = "Date", 
+        OrderingDirection orderingDirection = OrderingDirection.Ascending) =>
     {
-        var orderingDirection = direction switch
-        {
-            0 => OrderingDirection.Ascending,
-            _ => OrderingDirection.Descending
-        };
         return Results.Ok(await concerts.GetConcertsAsync(page, numberElementsPerPage, orderingDirection, orderBy));
     });
 
