@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoRepository", "DemoRepos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoRepository.Core", "DemoRepository.Core\DemoRepository.Core.csproj", "{ECD4B330-49A9-40A7-AFBC-711D4CD0012B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoRepository.Infrastructure", "DemoRepository.Infrastructure\DemoRepository.Infrastructure.csproj", "{EA0ED2D6-CBD0-4ADA-81EA-994F2F963E64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoRepository.Data", "DemoRepository.Data\DemoRepository.Data.csproj", "{6800C88F-BF0E-4E24-BB9B-2DF910A7958F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{ECD4B330-49A9-40A7-AFBC-711D4CD0012B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECD4B330-49A9-40A7-AFBC-711D4CD0012B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECD4B330-49A9-40A7-AFBC-711D4CD0012B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA0ED2D6-CBD0-4ADA-81EA-994F2F963E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA0ED2D6-CBD0-4ADA-81EA-994F2F963E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA0ED2D6-CBD0-4ADA-81EA-994F2F963E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA0ED2D6-CBD0-4ADA-81EA-994F2F963E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6800C88F-BF0E-4E24-BB9B-2DF910A7958F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6800C88F-BF0E-4E24-BB9B-2DF910A7958F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6800C88F-BF0E-4E24-BB9B-2DF910A7958F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6800C88F-BF0E-4E24-BB9B-2DF910A7958F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
