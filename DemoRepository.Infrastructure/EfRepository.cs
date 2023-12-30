@@ -37,10 +37,10 @@ public class EfRepository<TEntity, TKey> : IRepository<TEntity, TKey>
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(TKey id)
-    {
-        var entity = new TEntity { Id = id };
-        _set.Remove(entity);
-        await _dbContext.SaveChangesAsync();
-    }
+   public async Task DeleteAsync(TKey id)
+       {
+           var entity = new TEntity { Id = id };
+           _set.Remove(entity);
+           await _dbContext.SaveChangesAsync();
+       } 
 }

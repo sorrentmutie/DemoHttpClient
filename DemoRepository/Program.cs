@@ -30,7 +30,8 @@ app.UseHttpsRedirection();
 var mapGroup = app.MapGroup("/weatherForecasts");
 
 mapGroup.MapPost("/",
-    async (IDataServices<WeatherForecastListItem, WeatherForecastDetails, int> dataServices, WeatherForecastDetails weatherForecast) =>
+    async (IDataServices<WeatherForecastListItem, WeatherForecastDetails, int> dataServices,
+        WeatherForecastDetails weatherForecast) =>
     {
         await dataServices.CreateAsync(weatherForecast);
         return Results.Created($"/weatherForecast/{weatherForecast.Id}", weatherForecast);
@@ -45,9 +46,24 @@ mapGroup.MapGet("/{id:int}",
 
 mapGroup.MapGet("/", async (IDataServices<WeatherForecastListItem, WeatherForecastDetails, int> dataServices) =>
 {
-     var weatherForecast = await dataServices.GetAllAsync();
-     return Results.Ok(weatherForecast);
+    var weatherForecast = await dataServices.GetAllAsync();
+    return Results.Ok(weatherForecast);
 });
 
+mapGroup.MapPut("/",
+    async (IDataServices<WeatherForecastListItem, WeatherForecastDetails, int> dataServices,
+        WeatherForecastDetails weatherForecast) =>
+    {
+        await dataServices.UpdateAsync(weatherForecast);
+        return Results.NoContent();
+    });
+
+// mapGroup.MapDelete("/{id:int}",
+//     async (IDataServices<WeatherForecastListItem, WeatherForecastDetails, int> dataServices, int id) =>
+//     {
+//         if (await dataServices.GetByIdAsync(id) is null) return Results.NotFound();
+//         await dataServices.DeleteAsync(id);
+//         return Results.Ok();
+//     });
 
 app.Run();
