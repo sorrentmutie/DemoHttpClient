@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DemoRepository.Infrastructure;
 
-public class EfRepository<TEntity, TKey> : IRepository<TEntity, TKey>  
+public class EfRepository<TEntity, TKey> : IRepository<TEntity, TKey>
     where TEntity : class, IEntity<TKey>, new()
 {
     private readonly DbContext _dbContext;
@@ -37,10 +37,13 @@ public class EfRepository<TEntity, TKey> : IRepository<TEntity, TKey>
         await _dbContext.SaveChangesAsync();
     }
 
-   public async Task DeleteAsync(TKey id)
-       {
-           var entity = new TEntity { Id = id };
-           _set.Remove(entity);
-           await _dbContext.SaveChangesAsync();
-       } 
+    public async Task DeleteAsync(TKey id)
+    {
+        var entity = await _set.FindAsync(id);
+        if (entity is not null)
+        {
+            _set.Remove(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+    }
 }

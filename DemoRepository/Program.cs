@@ -58,12 +58,12 @@ mapGroup.MapPut("/",
         return Results.NoContent();
     });
 
-// mapGroup.MapDelete("/{id:int}",
-//     async (IDataServices<WeatherForecastListItem, WeatherForecastDetails, int> dataServices, int id) =>
-//     {
-//         if (await dataServices.GetByIdAsync(id) is null) return Results.NotFound();
-//         await dataServices.DeleteAsync(id);
-//         return Results.Ok();
-//     });
+mapGroup.MapDelete("/{id:int}",
+    async (IDataServices<WeatherForecastListItem, WeatherForecastDetails, int> dataServices, int id) =>
+    {
+        if (await dataServices.GetByIdAsync(id) is null) return Results.NotFound();
+        await dataServices.DeleteAsync(id);
+        return Results.Ok();
+    });
 
 app.Run();
